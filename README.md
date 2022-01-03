@@ -2,7 +2,7 @@
 Tools for finding shortest paths in a binary image. The algorithm computes a "distance field," the distance from all points to an "endpoint." Certain regions are prohibited to cross, making most shortest paths curved.
 
 ## Algorithm
-<img src="figures/loft_T.png" width="400" title="N3125" alt="N3125" align="right" vspace = "0">
+<img src="figures/loft_T.PNG" width="400" title="N3125" alt="N3125" align="right" vspace = "0">
 
 This repository contains functions for finding the shortest path from one point to another in a binary image. The problem is set up so that white regions in the input image are traversable, while black are not. There are two main algorithms deployed for solving this problem. 
 
@@ -10,17 +10,22 @@ This repository contains functions for finding the shortest path from one point 
 2. `PathFinder.find_path()` in `maze_solving.py` initializes a path at the start point. It steps forward for `N_steps` iterations. At each step, we add a point to the path by moving in the direction of the local gradient `mu`. If the proposed point enters the set of prohibited pixels, we rotate the step vector `v` until it is back in the set of allowed pixels.
 
 ## Results
+### Maze solving
+<img src="figures/maze_arbitrary_pathdiag.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/N625.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/roseeroed2xdiag.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-*Fig. (left) 625 orie*
+<img src="figures/holy_moon_sol_lvl_2_bluecrop.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
+<img src="figures/manhat_diagram.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/comparison_over_N.PNG" width="1000" title="Comparison over Number of vectors" alt="comparison over N" vspace = "50">
+<img src="figures/rose2_pinched.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-## Demonstrating it works in higher dimensions
+*Fig. I found that sharp kinks or singularities in the image can interfere with the path-finding algorithm. In the above image, the path fails to make it to the end-point. This is because the wavefront "bled through" the thin layer of prohibited pixels of the flower petals. If this occurs, your image may be too noisy and you may try increasing the resolution and/or dilating the prohibited region using binary operations. I don't have a good solution for this yet.*
 
-<img src="figures/dimscan.PNG" width="1000" title="Comparison over Number of vectors" alt="comparison over N" vspace = "50">
+### Varying F (wave speed) field
+
+<img src="figures/Fvar.PNG" width="1000" title="Comparison over Number of vectors" alt="comparison over N" vspace = "50">
 
 *Fig. Nearest-neighbor distance distribution of `pop_size=400` points in 2, 3, 4, and 5D space. all x axes are shown with the same limits, which happens to truncate the distribution in 4 and 5D. Distances to nearest neighbors are measured in radians (computed using the dot product between a point and each of its nearest neighbors).*
 
