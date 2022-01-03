@@ -14,7 +14,20 @@ See `test.py` and docstrings in python files.
 Typically, both stages of the algorithm can be computationlly-intensive. I made use of pytorch to process tensors on the GPU, although the program can run on CPU as well. This can be done by setting `use_gpu=True` as long as pytorch, cudatoolkit, and cudnn are installed! GPU use led to a ~20x speedup on some images. 
 
 ```python
-eikonal_solver = EikonalSolver(img_path, 2500, use_gpu=False)
+# set parameters for distance field computation. Set start and end point by clicking in the figure.
+eikonal_solver = EikonalSolver(img_path, 2500, use_gpu=True)
+
+# compute distance field from end point clicked. varbs holds the gradient of the distance field and other parameters used in PathFinder.
+T, varbs = eikonal_solver.find_distance_field()
+
+# Set parameters of path finding algorithm. eta represents the step size.
+path_finder = PathFinder(varbs, N_steps=2100, eta=0.5)
+
+# Output will be an array where each row is the x-y position at that step in the path.
+traj = path_finder.find_path()
+
+# plot contour plot of T and shortest path traj
+plot_optimal_path(T, traj, line_color="white")
 ```
 
 ## Results
