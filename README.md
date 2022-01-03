@@ -10,16 +10,18 @@ This repository contains functions for finding the shortest path from one point 
 2. `PathFinder.find_path()` in `maze_solving.py` initializes a path at the start point. It steps forward for `N_steps` iterations. At each step, we add a point to the path by moving in the direction of the local gradient `mu`. If the proposed point enters the set of prohibited pixels, we rotate the step vector `v` until it is back in the set of allowed pixels.
 
 ## Results
+In the following figures the colorization indicates the distance from each pixel to the end-point, i.e. the distance field T. Darker indicates lower values. The contour plot of T is shown to highlight how the local gradient changes direction.
+
 ### Maze solving
-<img src="figures/maze_arbitrary_pathdiag.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/maze_arbitrary_pathdiag.PNG" width="700" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/roseeroed2xdiag.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/roseeroed2xdiag.PNG" width="700" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/holy_moon_sol_lvl_2_bluecrop.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/holy_moon_sol_lvl_2_bluecrop.png" width="700" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/manhat_diagram.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/manhat_diagram.PNG" width="700" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
-<img src="figures/rose2_pinched.PNG" width="1000" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
+<img src="figures/rose2_pinched.png" width="700" title="Comparison at 625 pop_size" alt="comparison N625" vspace = "50">
 
 *Fig. I found that sharp kinks or singularities in the image can interfere with the path-finding algorithm. In the above image, the path fails to make it to the end-point. This is because the wavefront "bled through" the thin layer of prohibited pixels of the flower petals. If this occurs, your image may be too noisy and you may try increasing the resolution and/or dilating the prohibited region using binary operations. I don't have a good solution for this yet.*
 
@@ -27,7 +29,7 @@ This repository contains functions for finding the shortest path from one point 
 
 <img src="figures/Fvar.PNG" width="1000" title="Comparison over Number of vectors" alt="comparison over N" vspace = "50">
 
-*Fig. Nearest-neighbor distance distribution of `pop_size=400` points in 2, 3, 4, and 5D space. all x axes are shown with the same limits, which happens to truncate the distribution in 4 and 5D. Distances to nearest neighbors are measured in radians (computed using the dot product between a point and each of its nearest neighbors).*
+*Fig. These figures are from a separate experiment where an entire set of pixels is used as the seed for the eikonal solver. They can not be reproduced with the current version of the code, which asks the user only for a start and end point (the end-point becomes the seed). Changing the speed field F causes the gradient of the distance field to change in such a way that the eikonal equation is satisfied. When F=1 everywhere, the gradient magnitude equals 1 everywhere. Where F is higher, the gradient magnitude is lower, and vice versa.*
 
 ## Usage
 See `test.py` and docstrings in python files.
