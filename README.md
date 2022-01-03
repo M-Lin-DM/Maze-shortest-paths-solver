@@ -11,12 +11,10 @@ This repository contains functions for finding the shortest path from one point 
 ## Usage
 See `test.py` and docstrings in python files.
 ### GPU Acceleration
-Typically, both stages of the algorithm can be computationlly-intensive. I made use of pytorch to process tensors on the GPU, although the program can run on CPU as well. This can be done by setting `use_gpu=True` as long as pytorch, cudatoolkit, and cudnn are installed!
+Typically, both stages of the algorithm can be computationlly-intensive. I made use of pytorch to process tensors on the GPU, although the program can run on CPU as well. This can be done by setting `use_gpu=True` as long as pytorch, cudatoolkit, and cudnn are installed! GPU use led to a ~20x speedup on some images. 
 
-python
-```
-eikonal_solver = EikonalSolver(img_path, 2500,
-                                   use_gpu=False)  # setting use_gpu=True led to a ~20x speedup on some images. 
+```python
+eikonal_solver = EikonalSolver(img_path, 2500, use_gpu=False)
 ```
 
 ## Results
